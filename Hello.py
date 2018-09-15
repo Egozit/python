@@ -1,2 +1,1 @@
-# -*- coding: cp1251 -*-
-print("������ ���!")
+print("Hello world!")
