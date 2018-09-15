@@ -1,2 +1,3 @@
-meta charset = "utf-8"
+AddDefaultCharset UTF-8    
+SetEnv PYTHONIOENCODING utf8
 print("������ ���!")
