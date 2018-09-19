@@ -26,3 +26,4 @@ elif answer == "N":
     print("Прощайте!")
 else:
     print("Неизвестный ответ!")
+    
