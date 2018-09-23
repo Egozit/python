@@ -41,3 +41,24 @@ print("Число b= ", b)
 # Для вычисления квадратного корня воспользуйтесь функцией sqrt() модуля math
 # import math
 # math.sqrt(4) - вычисляет корень числа 4
+
+import math
+
+
+print("Программа для решения квадратного уравнения вида ax2 + bx + c = 0.")
+
+a = int(input("Введите a: "))
+b = int(input("Введите b: "))
+c = int(input("Введите c: "))
+
+discr = b ** 2 - 4 * a * c
+
+if discr < 0:
+    print("Корней нет")
+elif discr == 0:
+    print("Единственный корень: х = ", -b / (2 * a))
+else:
+    print("Первый корень: х1 = ", (-b + math.sqrt(discr)) / (2 * a))
+    print("Второй корень: х2 = ", (-b - math.sqrt(discr)) / (2 * a))
+
+
