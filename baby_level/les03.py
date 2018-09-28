@@ -1,9 +1,12 @@
 
 import os
+from builtins import print, complex
+
 import psutil
 import sys
 import platform
 import shutil
+
 
 def duplicate_file(filename):
     if os.path.isfile(filename):
@@ -13,6 +16,21 @@ def duplicate_file(filename):
                     print("Файл ", newfile, " был успешно создан")
                 else:
                     print("Возникла ошибка")
+
+
+def del_duplicats(dirname):
+    file_list = os.listdir(dirname)
+    doubl_count = 0
+
+    for f in file_list:
+        fullname = os.path.join(dirname, f)
+        if fullname.endswith(".dupl"):
+            os.remove(fullname)
+            if not os.path.exists(fullname):
+                doubl_count += 1
+                print("Файл ", fullname, " был успешно удален")
+    return doubl_count
+
 
 def sys_info():
     print("Отлично, за работу!")
@@ -26,6 +44,7 @@ def sys_info():
     print(" [7] - дублирование файлов текущей директории")
     print(" [8] - дублирование указанного файла")
     print(" [9] - удаление дубликатов в директории")
+
 
 answer = ''
 
@@ -61,14 +80,8 @@ while answer != 'q':
         elif do == 9:
             print("= удаление дубликатов в директории=")
             dirname = input("Укажите имя директории: ")
-            file_list = os.listdir(dirname)
-            # i = 0
-            # while i < len(file_list):
-            for f in file_list:
-                fullname = os.path.join(dirname, f)
-                if fullname.endswith(".dupl"):
-                    os.remove(fullname)
-                i += 1
+            count = del_duplicats(dirname)
+            print("-- Удалено файлов: ", count)
         else:
             pass
             
@@ -76,4 +89,3 @@ while answer != 'q':
         print("Прощайте!")
     else:
         print("Неизвестный ответ!")
-        
