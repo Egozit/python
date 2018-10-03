@@ -41,7 +41,9 @@ day = date[:2]
 month = date[3:5]
 year = date[6:]
 if day.isdigit() and len(day) == 2 and len(month) == 2 and len(year) == 4 and 1 <= int(day) <= 31 and 1 <= int(month) <= 12 and 1 <= int(year) <= 9999:
-    if int(month) % 2 == 0 and int(day) == 31:
+    if int(month) % 2 == 0 and int(day) == 31 and int(month) < 8:
+        print("В этом месяце меньше дней")
+    elif int(month) % 2 != 0 and int(day) == 31 and int(month) >= 8:
         print("В этом месяце меньше дней")
     else:
         print("Дата корректна!")
