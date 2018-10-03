@@ -81,3 +81,29 @@ else:
 #
 # Вход: 11
 # Выход: 5 3
+print("{:*^30}".format("Задача-3"))
+N =input("В какую комнату поедем?")
+
+list = []
+i = 1
+num = 0
+
+while i < int(N) + 1 and num <= int(N):
+    list_i = []
+    j = 0
+    while j < i * i:
+        j += 1
+        num += 1
+        list_i.append(num)
+        if j % i == 0:
+            list.append(list_i)
+            list_i = []
+    i += 1
+
+print(list)
+
+i = 0
+while i < len(list):
+    if int(N) in list[i]:
+        print(i + 1, "этаж", list[i].index(int(N)) + 1, "комната")
+    i += 1
