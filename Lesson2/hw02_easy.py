@@ -48,9 +48,8 @@ print("List1 = ", lst1)
 print("List2 = ", lst2)
 
 for num in lst2:
-    for char in lst1:
-        if num in lst1:
-            lst1.remove(num)
+    if num in lst1:
+         lst1.remove(num)
 
 print("New List1 = ", lst1)
 
