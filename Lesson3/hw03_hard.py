@@ -1,3 +1,4 @@
+from fractions import Fraction
 # Задание-1:
 # Написать программу, выполняющую операции (сложение и вычитание) с простыми дробями.
 # Дроби вводятся и выводятся в формате:
@@ -8,8 +9,29 @@
 # Вывод: 1 17/42  (результат обязательно упростить и выделить целую часть)
 # Ввод: -2/3 - -2
 # Вывод: 1 1/3
+def fractions(string):
+    divide = string.split(' ')
+    a1 = divide[0].split('/')
+    a2 = divide[2].split('/')
+    a = Fraction(int(a1[0]), int(a1[1]))
+    b = Fraction(int(a2[0]), int(a2[1]))
+    c = divide[1]
+    if c == '+':
+        result = a + b
+    else:
+        result = a - b
+    frac_res = str(result).split('/')
+    res_num = frac_res[0]
+    res_den = frac_res[1]
+    if int(res_num) >= int(res_den):
+        res_num = int(res_num) - int(res_den)
+        result = '1 ' + Fraction(str(res_num), res_den)
+    return result
 
 
+example = '5/6 + 4/7'
+
+print(fractions(example))
 # Задание-2:
 # Дана ведомость расчета заработной платы (файл "data/workers").
 # Рассчитайте зарплату всех работников, зная что они получат полный оклад,
