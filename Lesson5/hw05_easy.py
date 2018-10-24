@@ -32,6 +32,13 @@ def listdir():
     return list
 
 
+def copy_dir():
+    dir_name = re.search('\/([^\/]+)$', sys.argv[0])[1]
+    shutil.copy(dir_name, os.path.join(os.getcwd(), 'copy_' + dir_name))
+    if os.path.exists('copy_' + dir_name):
+        print('File was copied')
+
+
 if __name__ == '__main__':
     print('{:*^30}'.format('Задача-1'))
 
@@ -52,7 +59,4 @@ if __name__ == '__main__':
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
     print('{:*^30}'.format('Задача-3'))
 
-    file_name = re.search('\/([^\/]+)$', sys.argv[0])[1]
-    shutil.copy(file_name, os.path.join(os.getcwd(), 'copy_' + file_name))
-    if os.path.exists('copy_' + file_name):
-        print('File was copied')
+    copy_dir()
