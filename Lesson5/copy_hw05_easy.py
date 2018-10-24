@@ -9,18 +9,22 @@ def create_folder(dir_name):
     try:
         path = os.path.join(os.getcwd(), dir_name)
         os.mkdir(path)
-        print('Директория {} создана'.format(dir_name))
+        message = 'Директория {} создана'.format(dir_name)
     except FileExistsError:
-        pass
+        message = 'Directory {} already exists'.format(dir_name)
+    finally:
+        return message
 
 
 def del_folder(dir_name):
     try:
         path = os.path.join(os.getcwd(), dir_name)
         os.rmdir(path)
-        print('Директория {} удалена'.format(dir_name))
+        message = 'Директория {} удалена'.format(dir_name)
     except FileNotFoundError:
-        pass
+        message = 'Directory {} doesnt exist'.format(dir_name)
+    finally:
+        return message
 
 
 def listdir():
@@ -32,10 +36,10 @@ if __name__ == '__main__':
     print('{:*^30}'.format('Задача-1'))
 
     for itm in range(1, 10):
-        create_folder('dir_' + str(itm))
+        print(create_folder('dir_' + str(itm)))
 
     for itm in range(1, 10):
-        del_folder('dir_' + str(itm))
+        print(del_folder('dir_' + str(itm)))
 
 # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
