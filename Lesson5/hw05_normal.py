@@ -1,5 +1,5 @@
 import hw05_easy as easy
-import sys
+import sys, os
 # Задача-1:
 # Напишите небольшую консольную утилиту,
 # позволяющую работать с папками текущей директории.
@@ -24,9 +24,19 @@ def print_help():
     print("del - Удалить папку")
     print("create - Создать папку")
 
+# Функция на открытие папки работает только во время выполнения одного вызова
+#  в консоли, как сделать ее многоразовой, чтобы программа работала с той
+# директорией, что я задаю в последствии, я не знаю
+def open_folder(dir_name):
+    try:
+        os.chdir(os.path.join(os.getcwd(), dir_name))
+        message = 'Directory opened'
+        print(os.getcwd())
+    except FileNotFoundError:
+        message = 'File not found'
+    finally:
+        return message
 
-def open_folder():
-    pass
 
 do = {
     'help': print_help,
@@ -36,6 +46,7 @@ do = {
     'create': easy.create_folder
 }
 
+
 try:
     dir_name = sys.argv[2]
 except IndexError:
@@ -44,12 +55,13 @@ try:
     key = sys.argv[1]
 except IndexError:
     key = None
+
 if key:
     if do.get(key):
         if dir_name:
-            do[key](dir_name)
+            print(1)
+            print(do[key](dir_name))
         else:
-            do[key]()
+            print(do[key]())
     else:
         print('Wrong key')
-
