@@ -13,3 +13,112 @@
 # Исходной директорией считать ту, в которой был запущен скрипт.
 
 # P.S. По возможности, сделайте кросс-платформенную реализацию.
+import os, sys, shutil
+print('sys.argv = ', sys.argv)
+
+
+def print_help():
+    print("help - получение справки")
+    print("mkdir <dir_name> - создание директории")
+    print("ping - тестовый ключ")
+    print("cp <file_name> - создает копию указанного файла")
+    print('rm <file_name> - удаляет указанный файл ')
+    print('cd <full_path or relative_path> - меняет текущую директорию '
+          'на указанную')
+    print('ls - отображение полного пути текущей директории')
+
+
+def make_dir():
+    if not dir_name:
+        print("Необходимо указать имя директории вторым параметром")
+        return
+    dir_path = os.path.join(os.getcwd(), dir_name)
+    try:
+        os.mkdir(dir_path)
+        print('директория {} создана'.format(dir_name))
+    except FileExistsError:
+        print('директория {} уже существует'.format(dir_name))
+
+
+def ping():
+    print("pong")
+
+
+def copy_dir():
+    if not dir_name:
+        print("Необходимо указать имя директории вторым параметром")
+        return
+    try:
+        shutil.copy(dir_name, os.path.join(os.getcwd(), 'copy_' + dir_name))
+        if os.path.exists('copy_' + dir_name):
+            message = 'File was copied'
+    except TypeError:
+        message = 'Wrong type of file'
+    except FileNotFoundError:
+        message = 'File not found'
+    finally:
+        print(message)
+        return
+
+
+def remove_dir():
+    if not dir_name:
+        print("Необходимо указать имя директории вторым параметром")
+        return
+    dir_path = os.path.join(os.getcwd(), dir_name)
+    try:
+        os.rmdir(dir_path)
+        print('директория {} удалена'.format(dir_name))
+    except FileNotFoundError:
+        print('директория {} не найдена'.format(dir_name))
+    except OSError:
+        try:
+            os.remove(dir_path)
+            print('директория {} удалена'.format(dir_name))
+        except OSError:
+            print('директоря {} не пуста'.format(dir_name))
+
+
+def change_dir():
+    if not dir_name:
+        print("Необходимо указать имя директории вторым параметром")
+        return
+    try:
+        dir_path = os.path.join(os.getcwd(), dir_name)
+        os.chdir(dir_path)
+        print('Directory opened {}'.format(dir_path))
+        print(os.getcwd())
+    except FileNotFoundError:
+        print('File not found')
+
+
+def full_path():
+    print('Полный путь текущей директории: {}'.format(os.getcwd()))
+
+do = {
+    "help": print_help,
+    "mkdir": make_dir,
+    "ping": ping,
+    'cp': copy_dir,
+    'rm': remove_dir,
+    'cd': change_dir,
+    'ls': full_path
+}
+
+try:
+    dir_name = sys.argv[2]
+except IndexError:
+    dir_name = None
+
+try:
+    key = sys.argv[1]
+except IndexError:
+    key = None
+
+
+if key:
+    if do.get(key):
+        do[key]()
+    else:
+        print("Задан неверный ключ")
+        print("Укажите ключ help для получения справки")
