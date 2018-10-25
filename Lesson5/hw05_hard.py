@@ -14,7 +14,6 @@
 
 # P.S. По возможности, сделайте кросс-платформенную реализацию.
 import os, sys, shutil
-print('sys.argv = ', sys.argv)
 
 
 def print_help():
@@ -43,7 +42,7 @@ def make_dir():
 def ping():
     print("pong")
 
-
+#может скопировать файл но не может директорию, выдает ошибку PermitionError
 def copy_dir():
     if not dir_name:
         print("Необходимо указать имя директории вторым параметром")
@@ -56,6 +55,8 @@ def copy_dir():
         message = 'Wrong type of file'
     except FileNotFoundError:
         message = 'File not found'
+    except PermissionError:
+        message = 'Permission denied'
     finally:
         print(message)
         return
@@ -78,7 +79,7 @@ def remove_dir():
         except OSError:
             print('директоря {} не пуста'.format(dir_name))
 
-
+#не знаю как вернуться назад по абсолютному пути
 def change_dir():
     if not dir_name:
         print("Необходимо указать имя директории вторым параметром")
@@ -105,20 +106,20 @@ do = {
     'ls': full_path
 }
 
-try:
-    dir_name = sys.argv[2]
-except IndexError:
-    dir_name = None
+while True:
+    code = input('Введите ключ команды (q - exit): ')
+    code = code.split(' ')
+    key = code[0]
+    try:
+        dir_name = code[1]
+    except IndexError:
+        dir_name = None
+    if key == 'q':
+        break
+    if key:
+        if do.get(key):
+            do[key]()
+        else:
+            print("Задан неверный ключ")
+            print("Укажите ключ help для получения справки")
 
-try:
-    key = sys.argv[1]
-except IndexError:
-    key = None
-
-
-if key:
-    if do.get(key):
-        do[key]()
-    else:
-        print("Задан неверный ключ")
-        print("Укажите ключ help для получения справки")
