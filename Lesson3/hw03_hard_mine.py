@@ -14,25 +14,6 @@ import os
 
 # fraction = '-4 1/2'
 
-# def get_fraction_components(fraction):
-# 	fraction_components = fraction.split(' ')
-# 	if len(fraction_components) > 1:
-# 		int_part, float_part = fraction_components[0], fraction_components[1]
-# 	else:
-# 		int_part, float_part = 0, fraction_components[0]
-# 	if float_part:
-# 		numerator, denominator = float_part.split('/')
-# 	else:
-# 		numerator, denominator = 0, 0
-# 	if not int_part:
-# 		int_part = 0
-# 	if not numerator:
-# 		numerator = 1
-# 	if not denominator:
-# 		denominator = 1
-
-# 	return int(int_part), int(numerator), int(denominator)
-
 # создадим метод для преобразования дроби вида a b/c в неправильную дробь
 def get_fraction_components(fraction):
     if fraction != '0':
@@ -133,7 +114,6 @@ HOURS_WORKED_HEADER_NAME = 'Отработано'
 # задаем постоянные для путей к соответствующим файлам
 HOURS_OF_FILE_PATH = 'data/hours_of'
 WORKERS_FILE_PATH = 'data/workers'
-
 
 
 
