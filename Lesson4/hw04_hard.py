@@ -1,3 +1,4 @@
+import functools
 # Задание-1:
 # Матрицы в питоне реализуются в виде вложенных списков:
 # Пример. Дано:
@@ -41,12 +42,29 @@ number = """
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"""
 print('{:*^30}'.format('Задача-2'))
-i = 0
-while i < len(number):
-    a = int(number[i])*int(number[i+1])*int(number[i+2])*int(number[i+3])*int(number[i+4])
-    print(a)
-    i += 1
-max_mult = 1
+
+numbers = [int(itm) for itm in list(number) if itm != '\n']
+
+# def multiply(query, start_idx, amount):
+#     multi = query[start_idx]
+#     i = 0
+#     while i < amount:
+#         multi = multi * query[start_idx + 1]
+#         i+=1
+#     return multi
+maximus = 0
+for idx, el in enumerate(numbers):
+    try:
+        multi = int(numbers[idx]) * int(numbers[idx + 1]) * int(numbers[idx + 2])\
+            * \
+           int(numbers[idx + 3]) * int(numbers[idx + 4])
+    except IndexError:
+        pass
+    if multi > maximus:
+        maximus = multi
+        starting_idx = idx
+
+print(starting_idx, ':', maximus)
 # Задание-3 (Ферзи):
 # Известно, что на доске 8×8 можно расставить 8 ферзей так, чтобы они не били
 # друг друга. Вам дана расстановка 8 ферзей на доске.
