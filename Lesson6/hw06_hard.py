@@ -22,7 +22,6 @@ class Worker:
         self.salary = float(salary)
         self.position = position
         self.norma = float(norma)
-        # self.worked = float(worked)
         self.pay_ratio = self.salary / self.norma
 
     def calculate_salary(self):
